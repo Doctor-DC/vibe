@@ -159,7 +159,7 @@ export default {
   },
   created() {
     // 加载数据
-    fetch('/data/bands.json')
+    fetch('/data-bands.json')
       .then(r => r.json())
       .then(js => {
         this.bands = (js && js.bands) ? js.bands : (Array.isArray(js) ? js : [])
