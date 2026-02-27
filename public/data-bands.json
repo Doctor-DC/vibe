@@ -1,0 +1,247 @@
+{
+  "bands": [
+    {
+      "name": "Godspeed You! Black Emperor",
+      "origin": "加拿大",
+      "bio": "标志性的后摇团体，作品以宏大、电影感的构造著称。",
+      "played_in_china": true,
+      "china_years": [
+        "2013",
+        "2016"
+      ],
+      "image": "images/bands/godspeed-you-black-emperor.jpg",
+      "albums": [
+        {
+          "title": "F♯ A♯ ∞",
+          "year": 1997,
+          "image": "images/albums/godspeed-you-black-emperor__f-a.jpg"
+        },
+        {
+          "title": "Lift Your Skinny Fists Like Antennas to Heaven",
+          "year": 2000,
+          "image": "images/albums/godspeed-you-black-emperor__lift-your-skinny-fists-like-antennas-to-heaven.jpg"
+        },
+        {
+          "title": "Yanqui U.X.O.",
+          "year": 2002,
+          "image": "images/albums/godspeed-you-black-emperor__yanqui-uxo.jpg"
+        },
+        {
+          "title": "'Allelujah! Don't Bend! Ascend!",
+          "year": 2012,
+          "image": "images/albums/godspeed-you-black-emperor__allelujah-dont-bend-ascend.jpg"
+        },
+        {
+          "title": "Asunder, Sweet and Other Distress",
+          "year": 2015,
+          "image": "images/albums/godspeed-you-black-emperor__asunder-sweet-and-other-distress.jpg"
+        }
+      ]
+    },
+    {
+      "name": "Explosions in the Sky",
+      "origin": "美国",
+      "bio": "以旋律性强的吉他编排闻名，常用于影视原声。",
+      "played_in_china": false,
+      "china_years": [],
+      "image": "images/bands/explosions-in-the-sky.jpg",
+      "albums": [
+        {
+          "title": "Those Who Tell the Truth Shall Die, Those Who Tell the Truth Shall Live Forever",
+          "year": 2001,
+          "image": "images/albums/explosions-in-the-sky__those-who-tell-the-truth-shall-die-those-who-tell-the-truth-shall-live-forever.jpg"
+        },
+        {
+          "title": "The Earth Is Not a Cold Dead Place",
+          "year": 2003,
+          "image": "images/albums/explosions-in-the-sky__the-earth-is-not-a-cold-dead-place.jpg"
+        },
+        {
+          "title": "All of a Sudden I Miss Everyone",
+          "year": 2007,
+          "image": "images/albums/explosions-in-the-sky__all-of-a-sudden-i-miss-everyone.jpg"
+        },
+        {
+          "title": "Take Care, Take Care, Take Care",
+          "year": 2011,
+          "image": "images/albums/explosions-in-the-sky__take-care-take-care-take-care.jpg"
+        },
+        {
+          "title": "The Wilderness",
+          "year": 2016,
+          "image": "images/albums/explosions-in-the-sky__the-wilderness.jpg"
+        }
+      ]
+    },
+    {
+      "name": "Mogwai",
+      "origin": "苏格兰",
+      "bio": "风格多变的后摇代表，兼具噪音与抒情段落。",
+      "played_in_china": false,
+      "china_years": [],
+      "image": "images/bands/mogwai.jpg",
+      "albums": [
+        {
+          "title": "Young Team",
+          "year": 1997,
+          "image": "images/albums/mogwai__young-team.jpg"
+        },
+        {
+          "title": "Come On Die Young",
+          "year": 1999,
+          "image": "images/albums/mogwai__come-on-die-young.jpg"
+        },
+        {
+          "title": "Rock Action",
+          "year": 2001,
+          "image": "images/albums/mogwai__rock-action.jpg"
+        },
+        {
+          "title": "Happy Songs for Happy People",
+          "year": 2003,
+          "image": "images/albums/mogwai__happy-songs-for-happy-people.jpg"
+        },
+        {
+          "title": "Mr. Beast",
+          "year": 2006,
+          "image": "images/albums/mogwai__mr-beast.jpg"
+        },
+        {
+          "title": "Hardcore Will Never Die, But You Will",
+          "year": 2011,
+          "image": "images/albums/mogwai__hardcore-will-never-die-but-you-will.jpg"
+        },
+        {
+          "title": "Rave Tapes",
+          "year": 2014,
+          "image": "images/albums/mogwai__rave-tapes.jpg"
+        },
+        {
+          "title": "As the Love Continues",
+          "year": 2021,
+          "image": "images/albums/mogwai__as-the-love-continues.jpg"
+        }
+      ]
+    },
+    {
+      "name": "Sigur Rós",
+      "origin": "冰岛",
+      "bio": "带有氛围与民谣元素的后摇/氛围摇滚乐队。",
+      "played_in_china": false,
+      "china_years": [],
+      "image": "images/bands/sigur-rós.jpg",
+      "albums": [
+        {
+          "title": "Ágætis byrjun",
+          "year": 1999,
+          "image": "images/albums/sigur-rós__ágætis-byrjun.jpg"
+        },
+        {
+          "title": "( )",
+          "year": 2002,
+          "image": "images/albums/sigur-rós__.jpg"
+        },
+        {
+          "title": "Takk...",
+          "year": 2005,
+          "image": "images/albums/sigur-rós__takk.jpg"
+        },
+        {
+          "title": "Með suð í eyrum við spilum endalaust",
+          "year": 2008,
+          "image": "images/albums/sigur-rós__með-suð-í-eyrum-við-spilum-endalaust.jpg"
+        },
+        {
+          "title": "Valtari",
+          "year": 2012,
+          "image": "images/albums/sigur-rós__valtari.jpg"
+        },
+        {
+          "title": "Kveikur",
+          "year": 2013,
+          "image": "images/albums/sigur-rós__kveikur.jpg"
+        }
+      ]
+    },
+    {
+      "name": "Mono",
+      "origin": "日本",
+      "bio": "以弦乐和层叠吉他构成宏大情绪的器乐编排。",
+      "played_in_china": false,
+      "china_years": [],
+      "image": "images/bands/mono.jpg",
+      "albums": [
+        {
+          "title": "Under the Pipal Tree",
+          "year": 2001,
+          "image": "images/albums/mono__under-the-pipal-tree.jpg"
+        },
+        {
+          "title": "One Step More and You Die",
+          "year": 2002,
+          "image": "images/albums/mono__one-step-more-and-you-die.jpg"
+        },
+        {
+          "title": "Walking Cloud and Deep Red Sky, Flag Fluttered and the Sun Shined",
+          "year": 2004,
+          "image": "images/albums/mono__walking-cloud-and-deep-red-sky-flag-fluttered-and-the-sun-shined.jpg"
+        },
+        {
+          "title": "You Are There",
+          "year": 2006,
+          "image": "images/albums/mono__you-are-there.jpg"
+        },
+        {
+          "title": "Hymn to the Immortal Wind",
+          "year": 2009,
+          "image": "images/albums/mono__hymn-to-the-immortal-wind.jpg"
+        },
+        {
+          "title": "For My Parents",
+          "year": 2012,
+          "image": "images/albums/mono__for-my-parents.jpg"
+        },
+        {
+          "title": "Requiem for Hell",
+          "year": 2016,
+          "image": "images/albums/mono__requiem-for-hell.jpg"
+        },
+        {
+          "title": "Nowhere Now Here",
+          "year": 2019,
+          "image": "images/albums/mono__nowhere-now-here.jpg"
+        }
+      ]
+    },
+    {
+      "name": "Caspian",
+      "origin": "美国",
+      "bio": "以氛围与节奏推进著称的现代后摇乐队。",
+      "played_in_china": false,
+      "china_years": [],
+      "image": "images/bands/caspian.jpg",
+      "albums": [
+        {
+          "title": "Tertia",
+          "year": 2009,
+          "image": "images/albums/caspian__tertia.jpg"
+        },
+        {
+          "title": "Waking Season",
+          "year": 2012,
+          "image": "images/albums/caspian__waking-season.jpg"
+        },
+        {
+          "title": "Dust and Disquiet",
+          "year": 2015,
+          "image": "images/albums/caspian__dust-and-disquiet.jpg"
+        },
+        {
+          "title": "On Circles",
+          "year": 2020,
+          "image": "images/albums/caspian__on-circles.jpg"
+        }
+      ]
+    }
+  ]
+}

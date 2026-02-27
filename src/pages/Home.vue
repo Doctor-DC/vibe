@@ -70,7 +70,7 @@ export default {
     toggle(b) { this.$set(b, '_open', !b._open) }
   },
   created() {
-    fetch('/data/bands.json').then(r => r.json()).then(js => {
+    fetch('/data-bands.json').then(r => r.json()).then(js => {
       const list = (js && js.bands) ? js.bands : (Array.isArray(js) ? js : []);
       list.forEach(b => { if (typeof b._open === 'undefined') b._open = false });
       this.bands = list;
