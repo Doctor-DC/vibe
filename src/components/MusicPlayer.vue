@@ -1,61 +1,53 @@
 <template>
-  <div class="music-player">
-    <div class="player-header">
-      <h3>🎵 音乐播放器 - Explosions in the Sky</h3>
-      <span class="current-song">{{ currentSong }}</span>
+  <div class="music-player-mini" v-if="currentTrack">
+    <!-- 背景专辑封面 -->
+    <div class="player-bg" :class="{ rotating: isPlaying }" :style="{ backgroundImage: `url('${currentTrack.image}')` }">
+      <!-- 深色遮罩 -->
+      <div class="player-overlay">
+        <!-- 小猫在旋转 -->
+        <div v-if="isPlaying" class="cat-walker" :class="{ walking: isPlaying }">
+          <span class="cat">�</span>
+        </div>
+      </div>
     </div>
 
-    <!-- 播放进度条 -->
-    <div class="progress-container">
-      <div class="progress-bar" @click="seekTo">
-        <div class="buffer" :style="{ width: buffered + '%' }"></div>
+    <!-- 底部：进度条、时间和导航按钮 -->
+    <div class="player-footer">
+      <!-- 进度条 -->
+      <div class="progress-bar-mini" @click="seekTo">
         <div class="progress" :style="{ width: progress + '%' }"></div>
       </div>
-      <div class="time-display">
-        <span>{{ formatTime(currentTime) }}</span>
-        <span>{{ formatTime(duration) }}</span>
+
+      <!-- 时间显示 -->
+      <div class="time-info-center">{{ formatTime(currentTime) }} / {{ formatTime(duration) }}</div>
+
+      <!-- 控制按钮 -->
+      <div class="controls-bar">
+        <button @click="previousTrack" class="mini-btn">⏮</button>
+        <button @click="togglePlay" class="mini-btn play-btn">{{ isPlaying ? '⏸' : '▶' }}</button>
+        <button @click="nextTrack" class="mini-btn">⏭</button>
+        <button @click="toggleRepeat" class="mini-btn" :class="{ active: repeatMode > 0 }">🔁</button>
       </div>
     </div>
 
-    <!-- 播放控制 -->
-    <div class="player-controls">
-      <button @click="previousTrack" class="control-btn" title="上一曲">⏮</button>
-      <button @click="togglePlay" class="control-btn play-btn" :title="isPlaying ? '暂停' : '播放'">
-        {{ isPlaying ? '⏸' : '▶' }}
-      </button>
-      <button @click="nextTrack" class="control-btn" title="下一曲">⏭</button>
-      <button @click="toggleRepeat" class="control-btn" :class="{ active: repeatMode > 0 }">🔁</button>
-    </div>
-
-    <!-- 音量控制 -->
-    <div class="volume-control">
-      <span class="volume-icon">🔊</span>
-      <input type="range" v-model.number="volume" min="0" max="100" class="volume-slider" />
-      <span class="volume-text">{{ volume }}%</span>
-    </div>
-
-    <!-- 状态信息 -->
-    <div class="player-status">
-      <div v-if="isLoading" class="status-item loading">⏳ 正在加载...</div>
-      <div v-if="error" class="status-item error">❌ {{ error }}</div>
-      <div v-if="!isLoading && !error && isPlaying" class="status-item playing">▶ 正在播放</div>
-    </div>
-
-    <!-- 曲目列表 -->
-    <div class="playlist">
-      <div class="playlist-header">曲目列表</div>
-      <div 
-        v-for="(track, idx) in tracks" 
-        :key="idx"
-        @click="selectTrack(idx)"
-        :class="['track-item', { 
-          active: currentTrackIndex === idx, 
-          playing: isPlaying && currentTrackIndex === idx
-        }]"
-      >
-        <span class="track-number">{{ idx + 1 }}</span>
-        <span class="track-name">{{ track.title }}</span>
-        <span class="track-duration">{{ track.duration }}</span>
+    <!-- 播放列表 -->
+    <div class="songs-list">
+      <div class="list-header">📋 播放列表</div>
+      <div class="list-content">
+        <div 
+          v-for="(track, idx) in tracks"
+          :key="idx"
+          class="song-row"
+          :class="{ active: currentTrackIndex === idx, playing: isPlaying && currentTrackIndex === idx }"
+          @click="selectTrack(idx)"
+        >
+          <span class="row-number">{{ idx + 1 }}</span>
+          <div class="row-info">
+            <div class="row-title">{{ track.title }}</div>
+            <div class="row-album">{{ track.album }}</div>
+          </div>
+          <div class="row-duration">{{ track.duration }}</div>
+        </div>
       </div>
     </div>
 
@@ -90,13 +82,63 @@ export default {
       error: null,
       hasStarted: false,
       tracks: [
-        { title: 'Your Hand in Mine', duration: '4:32', url: '/music/your-hand-in-mine.mp3' }
+        {
+          title: 'Your Hand in Mine',
+          artist: 'Explosions in the Sky',
+          album: 'The Earth Is Not a Cold Dead Place',
+          duration: '4:32',
+          url: '/music/your-hand-in-mine.mp3',
+          image: '/images/albums/explosions-in-the-sky__the-earth-is-not-a-cold-dead-place.jpg'
+        },
+        {
+          title: 'How Strange, Innocence',
+          artist: 'Explosions in the Sky',
+          album: 'Those Who Tell the Truth Shall Die...',
+          duration: '3:47',
+          url: '/music/how-strange-innocence.mp3',
+          image: '/images/albums/explosions-in-the-sky__those-who-tell-the-truth-shall-die-those-who-tell-the-truth-shall-live-forever.jpg'
+        },
+        {
+          title: 'First Breath After Coma',
+          artist: 'Explosions in the Sky',
+          album: 'The Earth Is Not a Cold Dead Place',
+          duration: '6:16',
+          url: '/music/first-breath-after-coma.mp3',
+          image: '/images/albums/explosions-in-the-sky__the-earth-is-not-a-cold-dead-place.jpg'
+        },
+        {
+          title: 'I Had a Bad Dream',
+          artist: 'Explosions in the Sky',
+          album: 'All of a Sudden I Miss Everyone',
+          duration: '5:04',
+          url: '/music/i-had-a-bad-dream.mp3',
+          image: '/images/albums/explosions-in-the-sky__all-of-a-sudden-i-miss-everyone.jpg'
+        },
+        {
+          title: 'Be Breathless',
+          artist: 'Explosions in the Sky',
+          album: 'Take Care, Take Care, Take Care',
+          duration: '4:25',
+          url: '/music/be-breathless.mp3',
+          image: '/images/albums/explosions-in-the-sky__take-care-take-care-take-care.jpg'
+        },
+        {
+          title: 'Trembling Hands',
+          artist: 'Explosions in the Sky',
+          album: 'The Wilderness',
+          duration: '4:52',
+          url: '/music/trembling-hands.mp3',
+          image: '/images/albums/explosions-in-the-sky__the-wilderness.jpg'
+        }
       ]
     }
   },
   computed: {
     currentSong() {
       return this.tracks[this.currentTrackIndex]?.title || ''
+    },
+    currentTrack() {
+      return this.tracks[this.currentTrackIndex]
     },
     progress() {
       return this.duration > 0 ? (this.currentTime / this.duration) * 100 : 0
@@ -245,90 +287,168 @@ export default {
 @import '../../styles/variables';
 @import '../../styles/mixins';
 
-.music-player {
-  background: color(light-white-03);
-  border-radius: 10px;
-  padding: 0.8rem;
-  margin: 0.5rem auto;
-  max-width: 320px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+.music-player-mini {
+  position: relative;
+  width: 320px;
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 
-.player-header {
-  text-align: center;
+.player-bg {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+
+  &.rotating {
+    animation: spin 20s linear infinite;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-reverse {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.player-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  z-index: 2;
+}
+
+.player-bg.rotating .player-overlay {
+  animation: spin-reverse 20s linear infinite;
+}
+
+.cat-walker {
+  position: absolute;
+  width: 130%;
+  height: 130%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+
+@keyframes cat-walk {
+  0%, 100% {
+    transform: translateX(-50%) translateX(-80px);
+  }
+  50% {
+    transform: translateX(-50%) translateX(80px);
+  }
+}
+
+.cat {
+  position: absolute;
+  font-size: 1.8rem;
+  left: 50%;
+  top: -40px;
+  animation: cat-walk 4s ease-in-out infinite;
+  transform: translateX(-50%);
+}
+
+@keyframes cat-face-rotate {
+  0% {
+    transform: translateX(-50%) scaleX(-1) rotate(0deg);
+  }
+  100% {
+    transform: translateX(-50%) scaleX(-1) rotate(360deg);
+  }
+}
+
+.progress-bar-mini {
+  width: 100%;
+  height: 4.5px;
+  background: rgba(128, 128, 128, 0.4);
+  border-radius: 2.25px;
+  overflow: hidden;
+  cursor: pointer;
+  margin-bottom: 0.4rem;
+
+  .progress {
+    height: 100%;
+    background: color(accent);
+    border-radius: 2.25px;
+    transition: width 0.1s linear;
+  }
+}
+
+.time-info-center {
+  font-size: 0.75rem;
+  color: rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
   margin-bottom: 0.6rem;
-
-  h3 {
-    margin: 0 0 0.25rem 0;
-    font-size: 0.95rem;
-    color: color(text);
-  }
-
-  .current-song {
-    display: block;
-    color: color(accent);
-    font-size: 0.8rem;
-    font-weight: 600;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
 }
 
-.progress-container {
-  margin: 0.5rem 0;
 
-  .progress-bar {
-    background: color(light-white-04);
-    height: 4px;
-    border-radius: 2px;
-    overflow: hidden;
-    cursor: pointer;
-    margin-bottom: 0.3rem;
-    position: relative;
-
-    .buffer {
-      position: absolute;
-      background: rgba(102, 126, 234, 0.3);
-      height: 100%;
-    }
-
-    .progress {
-      background: color(accent);
-      height: 100%;
-      border-radius: 2px;
-      transition: width 0.1s linear;
-    }
-  }
-
-  .time-display {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.7rem;
-    color: color(muted);
-  }
-}
-
-.player-controls {
-  @include flex-center;
+.player-footer {
+  display: flex;
+  flex-direction: column;
   gap: 0.6rem;
-  margin: 0.6rem 0;
+  width: 100%;
+  margin-top: 1rem;
+  justify-content: center;
+  align-items: center;
+}
 
-  .control-btn {
-    background: color(light-white-04);
-    color: color(text);
-    border: none;
-    width: 36px;
-    height: 36px;
+.controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: white;
+
+  .mini-btn {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:hover {
-      background: color(accent);
-      color: white;
-      transform: scale(1.1);
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.5);
+      transform: scale(1.05);
     }
 
     &:active {
@@ -336,120 +456,48 @@ export default {
     }
 
     &.play-btn {
-      width: 44px;
-      height: 44px;
-      background: color(accent);
-      color: white;
-      font-size: 1.1rem;
-      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+      width: 40px;
+      height: 40px;
+      font-size: 1rem;
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.6);
     }
+  }
 
-    &.active {
-      background: color(accent);
-      color: white;
-    }
+  .time-info {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-left: 0.4rem;
+    white-space: nowrap;
   }
 }
 
-.volume-control {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 0.6rem 0;
-  padding: 0.5rem;
-  background: color(light-white-04);
-  border-radius: 6px;
+.songs-list {
+  margin-top: 1.2rem;
+  background: color(light-white-03);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 
-  .volume-icon {
+  .list-header {
+    padding: 0.8rem;
     font-size: 0.9rem;
-    min-width: 20px;
-  }
-
-  .volume-slider {
-    flex: 1;
-    height: 4px;
-    border-radius: 4px;
-    outline: none;
-    -webkit-appearance: none;
-    appearance: none;
-    background: linear-gradient(to right, color(light-white-01), color(accent));
-
-    &::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: color(accent);
-      cursor: pointer;
-    }
-
-    &::-moz-range-thumb {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: color(accent);
-      cursor: pointer;
-      border: none;
-    }
-  }
-
-  .volume-text {
-    font-size: 0.75rem;
-    color: color(muted);
-    min-width: 30px;
-    text-align: right;
-  }
-}
-
-.player-status {
-  margin: 0.4rem 0;
-  min-height: 16px;
-
-  .status-item {
-    font-size: 0.75rem;
-    padding: 0.3rem 0.5rem;
-    border-radius: 3px;
-    text-align: center;
-
-    &.loading {
-      color: #ff9800;
-      background: rgba(255, 152, 0, 0.1);
-    }
-
-    &.error {
-      color: #f44336;
-      background: rgba(244, 67, 54, 0.1);
-    }
-
-    &.playing {
-      color: color(accent);
-      background: rgba(102, 126, 234, 0.1);
-    }
-  }
-}
-
-.playlist {
-  max-height: 150px;
-  overflow-y: auto;
-  border-top: 1px solid color(light-white-04);
-  margin-top: 0.6rem;
-  padding-top: 0.5rem;
-
-  .playlist-header {
-    font-size: 0.75rem;
     font-weight: 600;
-    color: color(muted);
-    margin-bottom: 0.4rem;
-    padding: 0 0.4rem;
+    color: color(text);
+    border-bottom: 1px solid color(light-white-04);
+    background: rgba(102, 126, 234, 0.05);
   }
 
-  .track-item {
+  .list-content {
+    max-height: 320px;
+    overflow-y: auto;
+  }
+
+  .song-row {
     display: flex;
     align-items: center;
-    padding: 0.4rem;
-    margin: 0.15rem 0;
-    border-radius: 4px;
+    padding: 0.7rem 0.8rem;
+    border-bottom: 1px solid color(light-white-04);
     cursor: pointer;
     transition: all 0.2s ease;
     color: color(text);
@@ -467,28 +515,41 @@ export default {
       background: color(accent);
       color: white;
       font-weight: 600;
+
+      .row-album {
+        color: rgba(255, 255, 255, 0.8);
+      }
     }
 
-    .track-number {
-      color: color(muted);
-      font-size: 0.7rem;
-      min-width: 20px;
-      text-align: center;
-    }
-
-    .track-name {
-      flex: 1;
+    .row-number {
       font-size: 0.8rem;
-      margin: 0 0.4rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      color: color(muted);
+      min-width: 30px;
+      text-align: center;
+      font-weight: 500;
     }
 
-    .track-duration {
+    .row-info {
+      flex: 1;
+      margin: 0 0.8rem;
+
+      .row-title {
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-bottom: 0.2rem;
+      }
+
+      .row-album {
+        font-size: 0.75rem;
+        color: color(muted);
+        opacity: 0.8;
+      }
+    }
+
+    .row-duration {
+      font-size: 0.8rem;
       color: color(muted);
-      font-size: 0.7rem;
-      min-width: 35px;
+      min-width: 45px;
       text-align: right;
     }
   }

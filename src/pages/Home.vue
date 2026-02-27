@@ -9,7 +9,7 @@
       
       <!-- 游戏按钮 -->
       <div class="game-button-section">
-        <router-link to="/game" class="game-btn">🎮 乐队猜测游戏</router-link>
+        <router-link to="/game" class="game-btn">🎮 看图猜乐队</router-link>
       </div>
     </header>
 
