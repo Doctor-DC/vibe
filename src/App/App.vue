@@ -9,7 +9,7 @@
           </defs>
         </svg>
         <template v-for="(t, idx) in triangles">
-          <svg :key="idx" :class="['triangle-svg', `t${idx + 1}`]" :style="{ left: t.left + '%', top: t.top + '%' }" viewBox="0 0 40 40" :width="t.size" :height="t.size" aria-hidden="true">
+          <svg :key="idx" :class="['triangle-svg', `t${idx + 1}`]" :style="{ left: t.left + '%', top: t.top + '%', transform: `rotate(${t.rot}deg)` }" viewBox="0 0 40 40" :width="t.size" :height="t.size" aria-hidden="true">
             <polygon points="20,4 36,36 4,36" fill="none" :stroke="t.color" :stroke-width="t.stroke" filter="url(#glow)"/>
           </svg>
         </template>
@@ -33,6 +33,7 @@ export default {
     // palette: light blue, white, purple
     const palette = ['rgba(100,180,255,0.95)','rgba(255,255,255,0.95)','rgba(178,153,255,0.95)']
     const count = 3
+    const rotations = [-15, 25, -35]  // 为每个三角形设置不同的角度
     this.triangles = Array.from({length: count}).map((_, idx)=>{
       const positions = [
         { left: 8, top: 15 },    // top left
@@ -43,7 +44,7 @@ export default {
         left: positions[idx].left,
         top: positions[idx].top,
         size: Math.round(60 + Math.random()*40),
-        rot: Math.round(-40 + Math.random()*80),
+        rot: rotations[idx],
         color: palette[idx % palette.length],
         stroke: (0.9 + Math.random()*0.7).toFixed(2)
       }

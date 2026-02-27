@@ -3,7 +3,7 @@
     <!-- 分数/进度 -->
     <div class="game-header">
       <router-link to="/" class="back-btn">← 返回</router-link>
-      <div class="score">{{ score }}/5</div>
+      <div class="score">{{ score }}/3</div>
       <div class="status">{{ gameStatus }}</div>
     </div>
 
@@ -38,12 +38,12 @@
 
     <!-- 游戏结束 -->
     <div v-else class="game-over">
-      <Fireworks v-if="score === 5" />
+      <Fireworks v-if="score === 3" />
       <div class="result">
-        <h2 v-if="score === 5">🎉 完美！</h2>
+        <h2 v-if="score === 3">🎉 完美！</h2>
         <h2 v-else>游戏结束</h2>
-        <p class="final-score">最终得分：{{ score }}/5</p>
-        <p v-if="score === 5" class="message">你是后摇乐迷！</p>
+        <p class="final-score">最终得分：{{ score }}/3</p>
+        <p v-if="score === 3" class="message">你是后摇乐迷！</p>
         <p v-else class="message">再来一次吧，多了解一些乐队！</p>
         
         <router-link to="/" class="restart-btn">返回首页</router-link>
@@ -52,16 +52,20 @@
 
     <!-- 失败弹窗 -->
     <FailureModal v-if="showFailureModal" @retry="retryGame" @home="goHome" />
+    
+    <!-- 迷你播放器 -->
+    <MiniPlayer />
   </div>
 </template>
 
 <script>
 import Fireworks from '../components/Fireworks.vue'
 import FailureModal from '../components/FailureModal.vue'
+import MiniPlayer from '../components/MiniPlayer.vue'
 
 export default {
   name: 'Game',
-  components: { Fireworks, FailureModal },
+  components: { Fireworks, FailureModal, MiniPlayer },
   data() {
     return {
       bands: [],
@@ -92,8 +96,8 @@ export default {
 
       if (band === this.correctBand) {
         this.score++
-        // 如果达到5题，游戏结束
-        if (this.score === 5) {
+        // 如果达到3题，游戏结束
+        if (this.score === 3) {
           setTimeout(() => {
             this.gameActive = false
           }, 1500)
@@ -190,6 +194,7 @@ export default {
   position: relative;
   min-height: 100vh;
   padding: 2rem 1rem;
+  padding-bottom: 100px;
   z-index: 10;
 }
 
@@ -205,17 +210,19 @@ export default {
 
   .back-btn {
     padding: 0.5rem 1rem;
-    background: color(accent);
-    color: white;
+    background: linear-gradient(135deg, #e0e0e0 0%, #c0c0c0 100%);
+    color: #333;
     border: none;
     border-radius: 6px;
     text-decoration: none;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-weight: 500;
 
     &:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+      background: linear-gradient(135deg, #f0f0f0 0%, #d0d0d0 100%);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
   }
 
@@ -266,35 +273,43 @@ export default {
 
   .option-btn {
     padding: 1rem;
-    background: white;
-    border: 2px solid color(light-white-04);
-    border-radius: 8px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: 2px solid #5668d8;
+    border-radius: 10px;
     cursor: pointer;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    color: color(text);
+    font-size: 1.05rem;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
 
     &:hover:not(:disabled) {
-      border-color: color(accent);
-      background: rgba(102, 126, 234, 0.05);
-      transform: translateY(-2px);
+      border-color: #5668d8;
+      background: linear-gradient(135deg, #7a8ff5 0%, #8558b2 100%);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
     }
 
     &:disabled {
       cursor: not-allowed;
+      opacity: 0.6;
+      transform: none;
     }
 
     &.correct {
-      border-color: #4caf50;
-      background: rgba(76, 175, 80, 0.1);
-      color: #4caf50;
+      border-color: #2e7d32;
+      background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+      color: #1b5e20;
       font-weight: bold;
+      box-shadow: 0 4px 12px rgba(45, 125, 50, 0.3);
     }
 
     &.wrong {
-      border-color: #f44336;
-      background: rgba(244, 67, 54, 0.1);
-      color: #f44336;
+      border-color: #d32f2f;
+      background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+      color: #b71c1c;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
     }
   }
 }
@@ -322,17 +337,18 @@ export default {
 
   .next-btn {
     padding: 0.75rem 1.5rem;
-    background: color(accent);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: none;
     border-radius: 6px;
     cursor: pointer;
     font-size: 1rem;
     transition: all 0.3s ease;
+    font-weight: 600;
 
     &:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+      box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
     }
   }
 }
@@ -372,16 +388,17 @@ export default {
   .restart-btn {
     display: inline-block;
     padding: 1rem 2rem;
-    background: color(accent);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     text-decoration: none;
     border-radius: 8px;
     transition: all 0.3s ease;
     font-size: 1.1rem;
+    font-weight: 600;
 
     &:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+      box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
     }
   }
 }

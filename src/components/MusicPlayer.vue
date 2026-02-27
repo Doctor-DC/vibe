@@ -13,13 +13,18 @@
 
     <!-- 底部：进度条、时间和导航按钮 -->
     <div class="player-footer">
-      <!-- 进度条 -->
-      <div class="progress-bar-mini" @click="seekTo">
-        <div class="progress" :style="{ width: progress + '%' }"></div>
+      <!-- 时间显示和进度条容器 -->
+      <div class="progress-container">
+        <!-- 进度条 -->
+        <div class="progress-bar-mini" @click="seekTo" :title="`${formatTime(currentTime)} / ${formatTime(duration)}`">
+          <div class="progress" :style="{ width: progress + '%' }"></div>
+        </div>
+        <!-- 时间信息 -->
+        <div class="time-info-row">
+          <span class="time-current">{{ formatTime(currentTime) }}</span>
+          <span class="time-total">{{ formatTime(duration) }}</span>
+        </div>
       </div>
-
-      <!-- 时间显示 -->
-      <div class="time-info-center">{{ formatTime(currentTime) }} / {{ formatTime(duration) }}</div>
 
       <!-- 控制按钮 -->
       <div class="controls-bar">
@@ -67,6 +72,8 @@
 </template>
 
 <script>
+import { musicStore } from '../store/musicStore'
+
 export default {
   name: 'MusicPlayer',
   data() {
@@ -87,48 +94,9 @@ export default {
           artist: 'Explosions in the Sky',
           album: 'The Earth Is Not a Cold Dead Place',
           duration: '4:32',
+          id: '26402127',
           url: '/music/your-hand-in-mine.mp3',
           image: '/images/albums/explosions-in-the-sky__the-earth-is-not-a-cold-dead-place.jpg'
-        },
-        {
-          title: 'How Strange, Innocence',
-          artist: 'Explosions in the Sky',
-          album: 'Those Who Tell the Truth Shall Die...',
-          duration: '3:47',
-          url: '/music/how-strange-innocence.mp3',
-          image: '/images/albums/explosions-in-the-sky__those-who-tell-the-truth-shall-die-those-who-tell-the-truth-shall-live-forever.jpg'
-        },
-        {
-          title: 'First Breath After Coma',
-          artist: 'Explosions in the Sky',
-          album: 'The Earth Is Not a Cold Dead Place',
-          duration: '6:16',
-          url: '/music/first-breath-after-coma.mp3',
-          image: '/images/albums/explosions-in-the-sky__the-earth-is-not-a-cold-dead-place.jpg'
-        },
-        {
-          title: 'I Had a Bad Dream',
-          artist: 'Explosions in the Sky',
-          album: 'All of a Sudden I Miss Everyone',
-          duration: '5:04',
-          url: '/music/i-had-a-bad-dream.mp3',
-          image: '/images/albums/explosions-in-the-sky__all-of-a-sudden-i-miss-everyone.jpg'
-        },
-        {
-          title: 'Be Breathless',
-          artist: 'Explosions in the Sky',
-          album: 'Take Care, Take Care, Take Care',
-          duration: '4:25',
-          url: '/music/be-breathless.mp3',
-          image: '/images/albums/explosions-in-the-sky__take-care-take-care-take-care.jpg'
-        },
-        {
-          title: 'Trembling Hands',
-          artist: 'Explosions in the Sky',
-          album: 'The Wilderness',
-          duration: '4:52',
-          url: '/music/trembling-hands.mp3',
-          image: '/images/albums/explosions-in-the-sky__the-wilderness.jpg'
         }
       ]
     }
@@ -146,7 +114,7 @@ export default {
   },
   methods: {
     formatTime(seconds) {
-      if (!seconds || isNaN(seconds)) return '0:00'
+      if (seconds === undefined || seconds === null || isNaN(seconds)) return '0:00'
       const mins = Math.floor(seconds / 60)
       const secs = Math.floor(seconds % 60)
       return `${mins}:${secs < 10 ? '0' : ''}${secs}`
@@ -157,19 +125,21 @@ export default {
       if (this.isPlaying) {
         audio.pause()
       } else {
+        // 如果没有src，先加载当前曲目
         if (!audio.src) {
-          this.error = '请先上传或配置音乐文件'
-          return
+          const track = this.currentTrack
+          if (track && track.url) {
+            audio.src = track.url
+          } else {
+            this.error = '暂无音乐文件'
+            return
+          }
         }
-        // 如果之前是静音的，现在取消静音
+        
         if (audio.muted) {
           audio.muted = false
         }
-        // 第一次播放时从30秒开始
-        if (!this.hasStarted) {
-          audio.currentTime = 30
-          this.hasStarted = true
-        }
+        
         audio.play().catch(err => {
           this.error = '播放失败: ' + err.message
           this.isPlaying = false
@@ -181,7 +151,12 @@ export default {
       this.currentTime = 0
       this.error = null
       const track = this.tracks[idx]
-      if (track.url) {
+      
+      // 保存到musicStore
+      musicStore.setTrackIndex(idx)
+      musicStore.setTrack(track)
+      
+      if (track && track.url) {
         this.$refs.audioPlayer.src = track.url
         if (this.isPlaying) {
           this.$refs.audioPlayer.play().catch(err => {
@@ -189,7 +164,7 @@ export default {
           })
         }
       } else {
-        this.error = `"${track.title}" 暂无音源`
+        this.error = `"${track?.title}" 暂无音乐文件`
       }
     },
     nextTrack() {
@@ -227,6 +202,9 @@ export default {
       if (audio) {
         this.currentTime = audio.currentTime
         this.duration = audio.duration || 0
+        // 实时更新musicStore
+        musicStore.setCurrentTime(this.currentTime)
+        musicStore.setDuration(this.duration)
       }
     },
     onMetadataLoaded() {
@@ -245,9 +223,11 @@ export default {
     onPlay() {
       this.isPlaying = true
       this.isLoading = false
+      musicStore.setIsPlaying(true)
     },
     onPause() {
       this.isPlaying = false
+      musicStore.setIsPlaying(false)
     },
     onError() {
       this.error = '播放出错，请检查文件'
@@ -273,13 +253,46 @@ export default {
     const audio = this.$refs.audioPlayer
     if (audio) {
       audio.volume = this.volume / 100
+    }
+    
+    // 从musicStore恢复状态
+    const state = musicStore.getState()
+    if (state.track && state.track.url) {
+      this.currentTrackIndex = state.trackIndex
+      audio.src = state.track.url
+      this.currentTime = state.currentTime
+      if (audio) {
+        audio.currentTime = state.currentTime
+      }
+      
+      // 如果之前在播放，继续播放
+      if (state.isPlaying && audio) {
+        this.isPlaying = true
+        audio.play().catch(err => {
+          console.warn('自动播放被阻止:', err)
+          this.isPlaying = false
+        })
+      }
+    } else {
       // 初始化第一首歌曲的URL
       const firstTrack = this.tracks[0]
       if (firstTrack && firstTrack.url) {
         audio.src = firstTrack.url
       }
     }
-  }
+  },
+  
+  beforeDestroy() {
+    // 保存当前播放状态
+    if (this.currentTrack) {
+      musicStore.setTrack(this.currentTrack)
+      musicStore.setTrackIndex(this.currentTrackIndex)
+    }
+    musicStore.setIsPlaying(this.isPlaying)
+    musicStore.setCurrentTime(this.currentTime)
+    musicStore.setDuration(this.duration)
+    musicStore.setVolume(this.volume)
+  },
 }
 </script>
 
@@ -339,12 +352,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.3) 0%,
-    rgba(0, 0, 0, 0.4) 50%,
-    rgba(0, 0, 0, 0.7) 100%
-  );
+  background: transparent;
   z-index: 2;
 }
 
@@ -389,6 +397,13 @@ export default {
   }
 }
 
+.progress-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
 .progress-bar-mini {
   width: 100%;
   height: 4.5px;
@@ -396,14 +411,29 @@ export default {
   border-radius: 2.25px;
   overflow: hidden;
   cursor: pointer;
-  margin-bottom: 0.4rem;
 
   .progress {
     height: 100%;
-    background: color(accent);
+    background: linear-gradient(90deg, #64b4ff, #00d4ff);
     border-radius: 2.25px;
     transition: width 0.1s linear;
   }
+}
+
+.time-info-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: rgba(0, 0, 0, 0.6);
+  padding: 0 2px;
+}
+
+.time-current {
+  font-weight: 500;
+}
+
+.time-total {
+  opacity: 0.8;
 }
 
 .time-info-center {
@@ -417,7 +447,7 @@ export default {
 .player-footer {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.8rem;
   width: 100%;
   margin-top: 1rem;
   justify-content: center;

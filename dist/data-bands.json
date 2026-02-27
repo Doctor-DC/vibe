@@ -3,11 +3,17 @@
     {
       "name": "Godspeed You! Black Emperor",
       "origin": "加拿大",
-      "bio": "标志性的后摇团体，作品以宏大、电影感的构造著称。",
+      "bio": "标志性的后摇团体，作品以宏大、电影感的构造著称。2013年首次内地巡演，2016年二度巡演，2025年最新巡演覆盖上海、北京等城市。",
       "played_in_china": true,
+      "china_tours": [
+        {"year": "2013", "cities": ["北京", "上海"]},
+        {"year": "2016", "cities": ["上海", "北京"]},
+        {"year": "2025", "cities": ["上海", "北京"]}
+      ],
       "china_years": [
         "2013",
-        "2016"
+        "2016",
+        "2025"
       ],
       "image": "images/bands/godspeed-you-black-emperor.jpg",
       "albums": [
@@ -41,9 +47,20 @@
     {
       "name": "Explosions in the Sky",
       "origin": "美国",
-      "bio": "以旋律性强的吉他编排闻名，常用于影视原声。",
-      "played_in_china": false,
-      "china_years": [],
+      "bio": "以旋律性强的吉他编排闻名，常用于影视原声。2013年参演香港Clockenflap音乐节，2014年首次内地演出，2023-2024年多城巡演。",
+      "played_in_china": true,
+      "china_tours": [
+        {"year": "2013", "cities": ["香港"]},
+        {"year": "2014", "cities": ["北京", "上海"]},
+        {"year": "2023", "cities": ["广州", "上海", "北京"]},
+        {"year": "2024", "cities": ["广州", "上海", "北京", "香港", "台北"]}
+      ],
+      "china_years": [
+        "2013",
+        "2014",
+        "2023",
+        "2024"
+      ],
       "image": "images/bands/explosions-in-the-sky.jpg",
       "albums": [
         {
@@ -74,60 +91,14 @@
       ]
     },
     {
-      "name": "Mogwai",
-      "origin": "苏格兰",
-      "bio": "风格多变的后摇代表，兼具噪音与抒情段落。",
-      "played_in_china": false,
-      "china_years": [],
-      "image": "images/bands/mogwai.jpg",
-      "albums": [
-        {
-          "title": "Young Team",
-          "year": 1997,
-          "image": "images/albums/mogwai__young-team.jpg"
-        },
-        {
-          "title": "Come On Die Young",
-          "year": 1999,
-          "image": "images/albums/mogwai__come-on-die-young.jpg"
-        },
-        {
-          "title": "Rock Action",
-          "year": 2001,
-          "image": "images/albums/mogwai__rock-action.jpg"
-        },
-        {
-          "title": "Happy Songs for Happy People",
-          "year": 2003,
-          "image": "images/albums/mogwai__happy-songs-for-happy-people.jpg"
-        },
-        {
-          "title": "Mr. Beast",
-          "year": 2006,
-          "image": "images/albums/mogwai__mr-beast.jpg"
-        },
-        {
-          "title": "Hardcore Will Never Die, But You Will",
-          "year": 2011,
-          "image": "images/albums/mogwai__hardcore-will-never-die-but-you-will.jpg"
-        },
-        {
-          "title": "Rave Tapes",
-          "year": 2014,
-          "image": "images/albums/mogwai__rave-tapes.jpg"
-        },
-        {
-          "title": "As the Love Continues",
-          "year": 2021,
-          "image": "images/albums/mogwai__as-the-love-continues.jpg"
-        }
-      ]
-    },
-    {
       "name": "Sigur Rós",
       "origin": "冰岛",
-      "bio": "带有氛围与民谣元素的后摇/氛围摇滚乐队。",
+      "bio": "带有氛围与民谣元素的后摇/氛围摇滚乐队。未在中国内地演出，曾于2006年、2013年在中国香港及中国台湾地区演出。",
       "played_in_china": false,
+      "china_tours": [
+        {"year": "2006", "cities": ["香港", "台湾"]},
+        {"year": "2013", "cities": ["香港", "台湾"]}
+      ],
       "china_years": [],
       "image": "images/bands/sigur-rós.jpg",
       "albums": [
@@ -166,9 +137,26 @@
     {
       "name": "Mono",
       "origin": "日本",
-      "bio": "以弦乐和层叠吉他构成宏大情绪的器乐编排。",
-      "played_in_china": false,
-      "china_years": [],
+      "bio": "以弦乐和层叠吉他构成宏大情绪的器乐编排。2009年首次内地演出，多年来频繁巡演，2023年疫情后全中国巡演覆盖11个城市。",
+      "played_in_china": true,
+      "china_tours": [
+        {"year": "2009", "cities": ["上海", "北京"]},
+        {"year": "2011", "cities": ["上海"]},
+        {"year": "2012", "cities": ["北京", "上海", "成都", "武汉", "广州"]},
+        {"year": "2014", "cities": ["北京", "上海", "杭州", "武汉", "西安", "成都", "广州"]},
+        {"year": "2016", "cities": ["全国"]},
+        {"year": "2019", "cities": ["北京", "上海", "成都", "武汉", "杭州", "南京", "昆明"]},
+        {"year": "2023", "cities": ["沈阳", "大连", "北京", "上海", "杭州", "南京", "武汉", "广州", "深圳", "成都", "西安"]}
+      ],
+      "china_years": [
+        "2009",
+        "2011",
+        "2012",
+        "2014",
+        "2016",
+        "2019",
+        "2023"
+      ],
       "image": "images/bands/mono.jpg",
       "albums": [
         {
@@ -216,9 +204,18 @@
     {
       "name": "Caspian",
       "origin": "美国",
-      "bio": "以氛围与节奏推进著称的现代后摇乐队。",
-      "played_in_china": false,
-      "china_years": [],
+      "bio": "以氛围与节奏推进著称的现代后摇乐队。2014年首次内地专场巡演，2016年、2019年多次来华参演音乐节和巡演。",
+      "played_in_china": true,
+      "china_tours": [
+        {"year": "2014", "cities": ["深圳", "广州", "北京", "武汉", "上海"]},
+        {"year": "2016", "cities": ["深圳", "广州", "武汉", "重庆", "成都", "杭州", "上海", "北京"]},
+        {"year": "2019", "cities": ["成都", "北京", "武汉", "南京", "杭州", "上海", "深圳", "广州"]}
+      ],
+      "china_years": [
+        "2014",
+        "2016",
+        "2019"
+      ],
       "image": "images/bands/caspian.jpg",
       "albums": [
         {
