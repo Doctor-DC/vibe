@@ -1,0 +1,31 @@
+// Paper Plane
+.paper-plane {
+  position: absolute;
+  right: 8%;
+  bottom: 5%;
+  width: clamp(80px, 20vw, 200px);
+  height: clamp(80px, 20vw, 200px);
+  pointer-events: auto;
+  z-index: 3;
+  transition: none;
+  cursor: pointer;
+  filter: drop-shadow(0 0 12px color(blue-glow-8)) drop-shadow(0 0 24px color(cyan-glow-4));
+  animation: planeFloat 3.5s ease-in-out infinite;
+  transform: rotate(-12deg);
+
+  img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  &:hover {
+    animation: none;
+    transform: rotate(-6deg) scale(1.15);
+    @include smooth-transition(transform, 0.28s);
+  }
+
+  &.fly {
+    animation: planeFly 4s linear infinite;
+  }
+}

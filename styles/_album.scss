@@ -1,0 +1,32 @@
+// Albums Section - Container only
+.albums {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  max-height: 2000px;
+  opacity: 1;
+  transform: translateY(0);
+  @include smooth-transition((opacity, max-height, transform), 600ms);
+  overflow: visible;
+
+  &.collapsed {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-8px);
+    overflow: hidden;
+    @include smooth-transition((opacity, max-height, transform), 480ms);
+  }
+
+  &.collapsed .album {
+    transform: translateY(-8px);
+    opacity: 0;
+  }
+}
+
+// Note: Album Card component styles are in src/styles/AlbumCard.scss
+.tracklist {
+  color: color(muted);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}

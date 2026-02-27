@@ -1,0 +1,31 @@
+// Color Variables
+$colors: (
+  bg: #0f1115,
+  card: #0f1720,
+  muted: #9aa4b2,
+  accent: #9ad3e1,
+  text: #e6eef6,
+  light-white-low: rgba(255, 255, 255, 0.02),
+  light-white-06: rgba(255, 255, 255, 0.06),
+  light-white-08: rgba(255, 255, 255, 0.08),
+  light-white-05: rgba(255, 255, 255, 0.05),
+  light-white-04: rgba(255, 255, 255, 0.04),
+  light-white-03: rgba(255, 255, 255, 0.03),
+  light-white-01: rgba(255, 255, 255, 0.01),
+  dark-overlay-5: rgba(2, 6, 12, 0.5),
+  dark-overlay-9: rgba(2, 4, 8, 0.9),
+  dark-box: rgba(2, 8, 20, 0.55),
+  white-shadow-06: rgba(255, 255, 255, 0.06),
+  white-shadow-14: rgba(255, 255, 255, 0.14),
+  white-shadow-08: rgba(255, 255, 255, 0.08),
+  blue-glow-8: rgba(0, 128, 255, 0.8),
+  cyan-glow-4: rgba(0, 255, 255, 0.4)
+);
+
+// Helper function to get colors
+@function color($key) {
+  @return map-get($colors, $key);
+}
+
+// Breakpoints
+$breakpoint-mobile: 520px;

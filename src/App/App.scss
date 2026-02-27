@@ -1,0 +1,57 @@
+// App.vue Component Styles
+// Import global variables and mixins
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.app-root {
+  // Root container for Vue app
+}
+
+// Layout sections
+#app, .site-header, .site-footer, .container {
+  position: relative;
+  z-index: 4;
+}
+
+.site-header {
+  padding: 2rem 1rem;
+  text-align: center;
+
+  h1 {
+    margin: 0;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+  }
+}
+
+.tagline {
+  color: color(muted);
+  margin-top: 0.25rem;
+}
+
+.container {
+  max-width: 900px;
+  margin: 1rem auto;
+  padding: 0 1rem;
+}
+
+.toolbar {
+  @include flex-between;
+  gap: 0.75rem;
+
+  input[type="search"] {
+    flex: 1;
+    max-width: 320px;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    border: 1px solid color(light-white-04);
+    background: color(light-white-low);
+    color: color(text);
+  }
+}
+
+.site-footer {
+  padding: 1rem;
+  text-align: center;
+  color: color(muted);
+  font-size: 0.9rem;
+}

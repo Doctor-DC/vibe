@@ -1,0 +1,79 @@
+// AlbumCard.vue Component Styles
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+// Album Card Container
+.album {
+  background: color(light-white-03);
+  padding: 0.5rem;
+  border-radius: 6px;
+  min-width: 180px;
+  flex: 1 1 180px;
+  transform: translateY(0);
+  opacity: 1;
+  @include smooth-transition((transform, opacity), 520ms);
+
+  h4 {
+    margin: 0.25rem 0;
+    font-size: 1rem;
+  }
+
+  .meta {
+    color: color(muted);
+    font-size: 0.9rem;
+  }
+
+  .cover {
+    width: 100%;
+    height: 110px;
+    background: linear-gradient(135deg, color(light-white-low), color(light-white-01));
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    @include flex-center;
+    color: color(muted);
+  }
+}
+
+.cover-img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.tracks-wrap {
+  margin-top: 0.5rem;
+}
+
+.toggle {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: color(accent);
+  font-weight: 600;
+  padding: 0.25rem 0;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 0.6;
+  }
+}
+
+.tracks {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: color(muted);
+
+  ol {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+
+    li {
+      margin: 0.25rem 0;
+    }
+  }
+}

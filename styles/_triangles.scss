@@ -1,0 +1,20 @@
+// Triangle SVG Styling
+.triangle-svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  opacity: 0.95;
+  @include drop-shadow;
+  transform-origin: center;
+
+  // Per-triangle rotation classes
+  &.t1 { --rot: -6deg; }
+  &.t2 { --rot: 16deg; }
+  &.t3 { --rot: -12deg; }
+  &.t4 { --rot: 10deg; }
+  &.t5 { --rot: -28deg; }
+  &.t6 { --rot: 8deg; }
+  &.t7 { --rot: -20deg; }
+  &.t8 { --rot: 6deg; }
+}

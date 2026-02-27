@@ -1,0 +1,22 @@
+// Flexbox Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// Transition Mixin
+@mixin smooth-transition($property: all, $duration: 300ms) {
+  transition: $property $duration cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+// Drop Shadow Mixin
+@mixin drop-shadow($blur: 6px, $color: rgba(255, 255, 255, 0.06)) {
+  filter: drop-shadow(0 0 #{$blur} #{$color});
+}

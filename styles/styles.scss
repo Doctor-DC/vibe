@@ -1,0 +1,28 @@
+// Main Styles File - Imports all SCSS modules
+
+// 1. Variables and Mappers
+@import 'variables';
+
+// 2. Mixins
+@import 'mixins';
+
+// 3. Global Styles
+@import 'background';
+@import 'animations';
+
+// 4. Components
+@import 'triangles';
+@import 'paper-plane';
+
+// 5. Layout
+@import 'layout';
+
+// 6. Cards
+@import 'band';
+@import 'album';
+
+// 7. Footer
+@import 'footer';
+
+// 8. Responsive Design
+@import 'responsive';

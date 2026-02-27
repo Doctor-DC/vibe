@@ -1,0 +1,41 @@
+// Band Card Styling
+.band {
+  background: linear-gradient(180deg, color(light-white-08), color(light-white-05));
+  border: 2px solid color(light-white-06);
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px color(dark-box);
+
+  h3 {
+    margin: 0.25rem 0;
+  }
+}
+
+.band-header {
+  @include flex-between;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.band-toggle {
+  margin-left: auto;
+  color: color(accent);
+  font-weight: 600;
+}
+
+.band-image {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid color(light-white-03);
+}
+
+.band-info {
+  flex: 1;
+
+  h3 {
+    margin: 0;
+  }
+}

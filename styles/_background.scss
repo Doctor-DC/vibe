@@ -1,0 +1,42 @@
+// Global Styles
+:root {
+  --bg: #{color(bg)};
+  --card: #{color(card)};
+  --muted: #{color(muted)};
+  --accent: #{color(accent)};
+  --text: #{color(text)};
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, Segoe UI, Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg, color(bg), #071019);
+  color: color(text);
+  -webkit-font-smoothing: antialiased;
+}
+
+// Background Section
+#fancy-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background-image: linear-gradient(color(dark-overlay-5), color(dark-overlay-9)), 
+                    url('/images/milkyway-1.jpg'),
+                    url('images/starry.svg');
+  background-size: cover;
+  background-position: center;
+
+  .triangles {
+    position: absolute;
+    inset: 0;
+    opacity: 0.95;
+    pointer-events: none;
+    z-index: 2;
+  }
+}

@@ -1,0 +1,7 @@
+// Layout - Global positioning only
+#app, .site-header, .site-footer, .container {
+  position: relative;
+  z-index: 4;
+}
+
+// Note: Detailed layout styles for App.vue are in src/styles/App.scss

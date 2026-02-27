@@ -1,0 +1,48 @@
+// Triangle Float Animation
+@keyframes wiggleFloat {
+  0% {
+    transform: translateY(0) rotate(var(--rot));
+    opacity: 0.92;
+    filter: drop-shadow(0 0 4px color(white-shadow-06));
+  }
+  25% {
+    transform: translateY(-12px) rotate(calc(var(--rot) + 4deg));
+    opacity: 1;
+    filter: drop-shadow(0 0 12px color(white-shadow-14));
+  }
+  50% {
+    transform: translateY(0) rotate(calc(var(--rot) - 4deg));
+    opacity: 0.94;
+    filter: drop-shadow(0 0 6px color(white-shadow-08));
+  }
+  75% {
+    transform: translateY(-8px) rotate(calc(var(--rot) + 2deg));
+    opacity: 1;
+    filter: drop-shadow(0 0 12px color(white-shadow-14));
+  }
+  100% {
+    transform: translateY(0) rotate(var(--rot));
+    opacity: 0.92;
+    filter: drop-shadow(0 0 4px color(white-shadow-06));
+  }
+}
+
+// Paper Plane Float Animation
+@keyframes planeFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(-12deg);
+  }
+  50% {
+    transform: translateY(-28px) rotate(-12deg);
+  }
+}
+
+// Paper Plane Fly Animation
+@keyframes planeFly {
+  0%, 100% {
+    transform: translateX(0) rotate(-12deg);
+  }
+  50% {
+    transform: translateX(-60px) translateY(-30px) rotate(-4deg);
+  }
+}
