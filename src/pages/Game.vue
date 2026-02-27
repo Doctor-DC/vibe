@@ -3,7 +3,7 @@
     <!-- 分数/进度 -->
     <div class="game-header">
       <router-link to="/" class="back-btn">← 返回</router-link>
-      <div class="score">{{ score }}/3</div>
+      <div class="score">{{ progressScore }}/3</div>
       <div class="status">{{ gameStatus }}</div>
     </div>
 
@@ -85,6 +85,9 @@ export default {
   computed: {
     gameStatus() {
       return this.gameActive ? '进行中' : '已结束'
+    },
+    progressScore() {
+      return this.gameActive ? Math.min(this.score + 1, 3) : 3
     }
   },
   methods: {

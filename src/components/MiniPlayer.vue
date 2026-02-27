@@ -1,16 +1,30 @@
 <template>
-  <div class="mini-player" v-if="track">
-    <div class="mini-player-content">
-      <img v-if="track && track.image" :src="track.image" :alt="track.title" class="mini-cover" />
-      <div class="mini-info">
-        <div class="mini-title">{{ track ? track.title : '加载中...' }}</div>
-        <div class="mini-time">{{ formatTime(currentTime) }} / {{ formatTime(duration) }}</div>
-      </div>
-      <button @click="togglePlay" class="mini-play-btn">{{ isPlaying ? '⏸' : '▶' }}</button>
-    </div>
-    <div class="mini-progress">
-      <div class="mini-progress-bar" @click="seekTo" :style="{ width: progress + '%' }"></div>
-    </div>
+  <div
+    class="mini-floating-player"
+    v-if="track"
+    :style="floatStyle"
+    @mouseenter="isHovering = true"
+    @mouseleave="isHovering = false"
+    @mousedown="startDrag"
+    @touchstart.prevent="startDragTouch"
+  >
+    <img
+      v-if="track && track.image"
+      :src="track.image"
+      :alt="track.title"
+      class="floating-cover"
+      draggable="false"
+    />
+    <button
+      v-show="isHovering"
+      class="floating-play-btn"
+      @mousedown.stop
+      @touchstart.stop
+      @click.stop="togglePlay"
+      :title="isPlaying ? '暂停' : '播放'"
+    >
+      {{ isPlaying ? '⏸' : '▶' }}
+    </button>
     <audio ref="audio" @timeupdate="updateTime" @loadedmetadata="setDuration" @ended="stopPlay" @play="play" @pause="pause" />
   </div>
 </template>
@@ -25,6 +39,12 @@ export default {
       isPlaying: false,
       currentTime: 0,
       duration: 0,
+      isHovering: false,
+      isDragging: false,
+      dragOffsetX: 0,
+      dragOffsetY: 0,
+      x: 0,
+      y: 0,
       track: {
         title: 'Your Hand in Mine',
         artist: 'Explosions in the Sky',
@@ -37,14 +57,22 @@ export default {
     }
   },
   computed: {
-    progress() {
-      return this.duration > 0 ? (this.currentTime / this.duration) * 100 : 0
+    floatStyle() {
+      return {
+        transform: `translate(${this.x}px, ${this.y}px)`
+      }
     }
   },
   mounted() {
     this.$nextTick(() => {
       this.audioRef = this.$refs.audio
       if (!this.audioRef) return
+
+      this.initPosition()
+      window.addEventListener('mousemove', this.onDrag)
+      window.addEventListener('mouseup', this.stopDrag)
+      window.addEventListener('touchmove', this.onDragTouch, { passive: false })
+      window.addEventListener('touchend', this.stopDrag)
       
       // 从musicStore恢复当前播放的歌曲信息
       const state = musicStore.getState()
@@ -81,17 +109,55 @@ export default {
     })
   },
   beforeDestroy() {
+    window.removeEventListener('mousemove', this.onDrag)
+    window.removeEventListener('mouseup', this.stopDrag)
+    window.removeEventListener('touchmove', this.onDragTouch)
+    window.removeEventListener('touchend', this.stopDrag)
+
     // 保存音乐状态
     musicStore.setIsPlaying(this.isPlaying)
     musicStore.setCurrentTime(this.currentTime)
     musicStore.setDuration(this.duration)
   },
   methods: {
-    formatTime(seconds) {
-      if (seconds === undefined || seconds === null || isNaN(seconds)) return '0:00'
-      const mins = Math.floor(seconds / 60)
-      const secs = Math.floor(seconds % 60)
-      return `${mins}:${secs < 10 ? '0' : ''}${secs}`
+    initPosition() {
+      const size = 84
+      this.x = Math.max(12, window.innerWidth - size - 24)
+      this.y = Math.max(12, window.innerHeight - size - 120)
+    },
+    clampPosition(nextX, nextY) {
+      const size = 84
+      const maxX = Math.max(12, window.innerWidth - size - 12)
+      const maxY = Math.max(12, window.innerHeight - size - 12)
+      this.x = Math.min(Math.max(12, nextX), maxX)
+      this.y = Math.min(Math.max(12, nextY), maxY)
+    },
+    startDrag(event) {
+      if (event.button !== 0) return
+      this.isDragging = true
+      this.dragOffsetX = event.clientX - this.x
+      this.dragOffsetY = event.clientY - this.y
+    },
+    startDragTouch(event) {
+      const touch = event.touches && event.touches[0]
+      if (!touch) return
+      this.isDragging = true
+      this.dragOffsetX = touch.clientX - this.x
+      this.dragOffsetY = touch.clientY - this.y
+    },
+    onDrag(event) {
+      if (!this.isDragging) return
+      this.clampPosition(event.clientX - this.dragOffsetX, event.clientY - this.dragOffsetY)
+    },
+    onDragTouch(event) {
+      if (!this.isDragging) return
+      const touch = event.touches && event.touches[0]
+      if (!touch) return
+      event.preventDefault()
+      this.clampPosition(touch.clientX - this.dragOffsetX, touch.clientY - this.dragOffsetY)
+    },
+    stopDrag() {
+      this.isDragging = false
     },
     togglePlay() {
       if (!this.audioRef) return
@@ -111,12 +177,6 @@ export default {
       this.duration = this.audioRef.duration
       musicStore.setDuration(this.duration)
     },
-    seekTo(e) {
-      if (!this.audioRef || !this.duration) return
-      const rect = e.currentTarget.getBoundingClientRect()
-      const percent = (e.clientX - rect.left) / rect.width
-      this.audioRef.currentTime = percent * this.duration
-    },
     play() {
       this.isPlaying = true
       musicStore.setIsPlaying(true)
@@ -134,86 +194,64 @@ export default {
 </script>
 
 <style scoped>
-.mini-player {
+.mini-floating-player {
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
-  right: 0;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  z-index: 1000;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.mini-player-content {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 8px 16px;
-}
-
-.mini-cover {
-  width: 40px;
-  height: 40px;
-  border-radius: 4px;
-  object-fit: cover;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.mini-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.mini-title {
-  font-size: 13px;
-  font-weight: 500;
-  color: white;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.mini-time {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.8);
-  margin-top: 2px;
-}
-
-.mini-play-btn {
-  width: 36px;
-  height: 36px;
+  width: 84px;
+  height: 84px;
+  z-index: 1200;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  cursor: grab;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  transition: box-shadow 0.2s ease;
+}
+
+.mini-floating-player:active {
+  cursor: grabbing;
+}
+
+.mini-floating-player:hover {
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+.floating-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.floating-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
   border: none;
   color: white;
   font-size: 16px;
   cursor: pointer;
-  transition: all 0.2s;
-  flex-shrink: 0;
+  transition: background 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.mini-play-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: scale(1.05);
+.floating-play-btn:hover {
+  background: rgba(0, 0, 0, 0.6);
 }
 
-.mini-play-btn:active {
-  transform: scale(0.95);
-}
-
-.mini-progress {
-  height: 2px;
-  background: rgba(255, 255, 255, 0.2);
-  cursor: pointer;
-}
-
-.mini-progress-bar {
-  height: 100%;
-  background: rgba(255, 255, 255, 0.8);
-  transition: width 0.1s linear;
+@media (max-width: 768px) {
+  .floating-play-btn {
+    display: flex;
+    background: rgba(0, 0, 0, 0.45);
+  }
 }
 </style>

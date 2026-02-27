@@ -6,9 +6,27 @@
       "bio": "标志性的后摇团体，作品以宏大、电影感的构造著称。2013年首次内地巡演，2016年二度巡演，2025年最新巡演覆盖上海、北京等城市。",
       "played_in_china": true,
       "china_tours": [
-        {"year": "2013", "cities": ["北京", "上海"]},
-        {"year": "2016", "cities": ["上海", "北京"]},
-        {"year": "2025", "cities": ["上海", "北京"]}
+        {
+          "year": "2013",
+          "cities": [
+            "北京",
+            "上海"
+          ]
+        },
+        {
+          "year": "2016",
+          "cities": [
+            "上海",
+            "北京"
+          ]
+        },
+        {
+          "year": "2025",
+          "cities": [
+            "上海",
+            "北京"
+          ]
+        }
       ],
       "china_years": [
         "2013",
@@ -23,6 +41,11 @@
           "image": "images/albums/godspeed-you-black-emperor__f-a.jpg"
         },
         {
+          "title": "Slow Riot for New Zero Kanada",
+          "year": 1999,
+          "image": "images/albums/godspeed-you-black-emperor__slow-riot-for-new-zero-kanada.svg"
+        },
+        {
           "title": "Lift Your Skinny Fists Like Antennas to Heaven",
           "year": 2000,
           "image": "images/albums/godspeed-you-black-emperor__lift-your-skinny-fists-like-antennas-to-heaven.jpg"
@@ -30,17 +53,32 @@
         {
           "title": "Yanqui U.X.O.",
           "year": 2002,
-          "image": "images/albums/godspeed-you-black-emperor__yanqui-uxo.jpg"
+          "image": "images/albums/godspeed-you-black-emperor__yanqui-u-x-o.svg"
         },
         {
           "title": "'Allelujah! Don't Bend! Ascend!",
           "year": 2012,
-          "image": "images/albums/godspeed-you-black-emperor__allelujah-dont-bend-ascend.jpg"
+          "image": "images/albums/godspeed-you-black-emperor__allelujah-don-t-bend-ascend.svg"
         },
         {
           "title": "Asunder, Sweet and Other Distress",
           "year": 2015,
           "image": "images/albums/godspeed-you-black-emperor__asunder-sweet-and-other-distress.jpg"
+        },
+        {
+          "title": "Luciferian Towers",
+          "year": 2017,
+          "image": "images/albums/godspeed-you-black-emperor__luciferian-towers.svg"
+        },
+        {
+          "title": "G_d's Pee at State's End!",
+          "year": 2021,
+          "image": "images/albums/godspeed-you-black-emperor__g-d-s-pee-at-state-s-end.svg"
+        },
+        {
+          "title": "No Title as of Yet",
+          "year": 2024,
+          "image": "images/albums/godspeed-you-black-emperor__no-title-as-of-yet.svg"
         }
       ]
     },
@@ -50,10 +88,37 @@
       "bio": "以旋律性强的吉他编排闻名，常用于影视原声。2013年参演香港Clockenflap音乐节，2014年首次内地演出，2023-2024年多城巡演。",
       "played_in_china": true,
       "china_tours": [
-        {"year": "2013", "cities": ["香港"]},
-        {"year": "2014", "cities": ["北京", "上海"]},
-        {"year": "2023", "cities": ["广州", "上海", "北京"]},
-        {"year": "2024", "cities": ["广州", "上海", "北京", "香港", "台北"]}
+        {
+          "year": "2013",
+          "cities": [
+            "香港"
+          ]
+        },
+        {
+          "year": "2014",
+          "cities": [
+            "北京",
+            "上海"
+          ]
+        },
+        {
+          "year": "2023",
+          "cities": [
+            "广州",
+            "上海",
+            "北京"
+          ]
+        },
+        {
+          "year": "2024",
+          "cities": [
+            "广州",
+            "上海",
+            "北京",
+            "香港",
+            "台北"
+          ]
+        }
       ],
       "china_years": [
         "2013",
@@ -63,6 +128,11 @@
       ],
       "image": "images/bands/explosions-in-the-sky.jpg",
       "albums": [
+        {
+          "title": "How Strange, Innocence",
+          "year": 2000,
+          "image": "images/albums/explosions-in-the-sky__how-strange-innocence__42ce2e09.jpg"
+        },
         {
           "title": "Those Who Tell the Truth Shall Die, Those Who Tell the Truth Shall Live Forever",
           "year": 2001,
@@ -87,6 +157,11 @@
           "title": "The Wilderness",
           "year": 2016,
           "image": "images/albums/explosions-in-the-sky__the-wilderness.jpg"
+        },
+        {
+          "title": "End",
+          "year": 2023,
+          "image": "images/albums/explosions-in-the-sky__end__9b440f94.jpg"
         }
       ]
     },
@@ -96,41 +171,68 @@
       "bio": "带有氛围与民谣元素的后摇/氛围摇滚乐队。未在中国内地演出，曾于2006年、2013年在中国香港及中国台湾地区演出。",
       "played_in_china": false,
       "china_tours": [
-        {"year": "2006", "cities": ["香港", "台湾"]},
-        {"year": "2013", "cities": ["香港", "台湾"]}
+        {
+          "year": "2006",
+          "cities": [
+            "香港",
+            "台湾"
+          ]
+        },
+        {
+          "year": "2013",
+          "cities": [
+            "香港",
+            "台湾"
+          ]
+        }
       ],
       "china_years": [],
       "image": "images/bands/sigur-rós.jpg",
       "albums": [
         {
+          "title": "Von",
+          "year": 1997,
+          "image": "images/albums/sigur-ros__von__97418bc2.jpg"
+        },
+        {
           "title": "Ágætis byrjun",
           "year": 1999,
-          "image": "images/albums/sigur-rós__ágætis-byrjun.jpg"
+          "image": "images/albums/sigur-ros__ag-tis-byrjun__5ce521ff.jpg"
         },
         {
           "title": "( )",
           "year": 2002,
-          "image": "images/albums/sigur-rós__.jpg"
+          "image": "images/albums/sigur-ros__album__04fa1c64.jpg"
         },
         {
           "title": "Takk...",
           "year": 2005,
-          "image": "images/albums/sigur-rós__takk.jpg"
+          "image": "images/albums/sigur-ros__takk__aa55718a.jpg"
         },
         {
           "title": "Með suð í eyrum við spilum endalaust",
           "year": 2008,
-          "image": "images/albums/sigur-rós__með-suð-í-eyrum-við-spilum-endalaust.jpg"
+          "image": "images/albums/sigur-ros__me-su-i-eyrum-vi-spilum-endalaust.svg"
         },
         {
           "title": "Valtari",
           "year": 2012,
-          "image": "images/albums/sigur-rós__valtari.jpg"
+          "image": "images/albums/sigur-ros__valtari__ec49c717.jpg"
         },
         {
           "title": "Kveikur",
           "year": 2013,
-          "image": "images/albums/sigur-rós__kveikur.jpg"
+          "image": "images/albums/sigur-ros__kveikur__be5d7855.jpg"
+        },
+        {
+          "title": "Átta",
+          "year": 2023,
+          "image": "images/albums/sigur-ros__atta__dc36efeb.jpg"
+        },
+        {
+          "title": "Takk... (The Tape Variations)",
+          "year": 2025,
+          "image": "images/albums/sigur-ros__takk-the-tape-variations__598c7d97.jpg"
         }
       ]
     },
@@ -140,13 +242,75 @@
       "bio": "以弦乐和层叠吉他构成宏大情绪的器乐编排。2009年首次内地演出，多年来频繁巡演，2023年疫情后全中国巡演覆盖11个城市。",
       "played_in_china": true,
       "china_tours": [
-        {"year": "2009", "cities": ["上海", "北京"]},
-        {"year": "2011", "cities": ["上海"]},
-        {"year": "2012", "cities": ["北京", "上海", "成都", "武汉", "广州"]},
-        {"year": "2014", "cities": ["北京", "上海", "杭州", "武汉", "西安", "成都", "广州"]},
-        {"year": "2016", "cities": ["全国"]},
-        {"year": "2019", "cities": ["北京", "上海", "成都", "武汉", "杭州", "南京", "昆明"]},
-        {"year": "2023", "cities": ["沈阳", "大连", "北京", "上海", "杭州", "南京", "武汉", "广州", "深圳", "成都", "西安"]}
+        {
+          "year": "2009",
+          "cities": [
+            "上海",
+            "北京"
+          ]
+        },
+        {
+          "year": "2011",
+          "cities": [
+            "上海"
+          ]
+        },
+        {
+          "year": "2012",
+          "cities": [
+            "北京",
+            "上海",
+            "成都",
+            "武汉",
+            "广州"
+          ]
+        },
+        {
+          "year": "2014",
+          "cities": [
+            "北京",
+            "上海",
+            "杭州",
+            "武汉",
+            "西安",
+            "成都",
+            "广州"
+          ]
+        },
+        {
+          "year": "2016",
+          "cities": [
+            "全国"
+          ]
+        },
+        {
+          "year": "2019",
+          "cities": [
+            "北京",
+            "上海",
+            "成都",
+            "武汉",
+            "杭州",
+            "南京",
+            "昆明"
+          ]
+        },
+        {
+          "year": "2023",
+          "cities": [
+            "沈阳",
+            "大连",
+            "北京",
+            "上海",
+            "杭州",
+            "南京",
+            "武汉",
+            "广州",
+            "深圳",
+            "成都",
+            "西安"
+          ]
+        }
       ],
       "china_years": [
         "2009",
@@ -190,6 +354,16 @@
           "image": "images/albums/mono__for-my-parents.jpg"
         },
         {
+          "title": "The Last Dawn",
+          "year": 2014,
+          "image": "images/albums/mono__the-last-dawn__a6f4a942.jpg"
+        },
+        {
+          "title": "Rays of Darkness",
+          "year": 2014,
+          "image": "images/albums/mono__rays-of-darkness__ebf3e8be.jpg"
+        },
+        {
           "title": "Requiem for Hell",
           "year": 2016,
           "image": "images/albums/mono__requiem-for-hell.jpg"
@@ -198,6 +372,16 @@
           "title": "Nowhere Now Here",
           "year": 2019,
           "image": "images/albums/mono__nowhere-now-here.jpg"
+        },
+        {
+          "title": "Pilgrimage of the Soul",
+          "year": 2021,
+          "image": "images/albums/mono__pilgrimage-of-the-soul__6a5b4034.jpg"
+        },
+        {
+          "title": "OATH",
+          "year": 2024,
+          "image": "images/albums/mono__oath__b4529cc1.jpg"
         }
       ]
     },
@@ -207,9 +391,42 @@
       "bio": "以氛围与节奏推进著称的现代后摇乐队。2014年首次内地专场巡演，2016年、2019年多次来华参演音乐节和巡演。",
       "played_in_china": true,
       "china_tours": [
-        {"year": "2014", "cities": ["深圳", "广州", "北京", "武汉", "上海"]},
-        {"year": "2016", "cities": ["深圳", "广州", "武汉", "重庆", "成都", "杭州", "上海", "北京"]},
-        {"year": "2019", "cities": ["成都", "北京", "武汉", "南京", "杭州", "上海", "深圳", "广州"]}
+        {
+          "year": "2014",
+          "cities": [
+            "深圳",
+            "广州",
+            "北京",
+            "武汉",
+            "上海"
+          ]
+        },
+        {
+          "year": "2016",
+          "cities": [
+            "深圳",
+            "广州",
+            "武汉",
+            "重庆",
+            "成都",
+            "杭州",
+            "上海",
+            "北京"
+          ]
+        },
+        {
+          "year": "2019",
+          "cities": [
+            "成都",
+            "北京",
+            "武汉",
+            "南京",
+            "杭州",
+            "上海",
+            "深圳",
+            "广州"
+          ]
+        }
       ],
       "china_years": [
         "2014",
@@ -218,6 +435,11 @@
       ],
       "image": "images/bands/caspian.jpg",
       "albums": [
+        {
+          "title": "The Four Trees",
+          "year": 2007,
+          "image": "images/albums/caspian__the-four-trees__81fb9f62.jpg"
+        },
         {
           "title": "Tertia",
           "year": 2009,
@@ -237,6 +459,11 @@
           "title": "On Circles",
           "year": 2020,
           "image": "images/albums/caspian__on-circles.jpg"
+        },
+        {
+          "title": "California",
+          "year": 2023,
+          "image": "images/albums/caspian__california.svg"
         }
       ]
     }

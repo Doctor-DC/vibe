@@ -2,7 +2,7 @@
   <div class="home-page">
     <header class="site-header">
       <h1>后摇之声</h1>
-      <p class="tagline">介绍后摇乐队信息</p>
+      <p class="tagline"></p>
       
       <!-- 音乐播放器 -->
       <MusicPlayer />
