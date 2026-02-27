@@ -247,27 +247,27 @@ export default {
 
 .music-player {
   background: color(light-white-03);
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin: 1rem auto;
-  max-width: 500px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 0.8rem;
+  margin: 0.5rem auto;
+  max-width: 320px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .player-header {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.6rem;
 
   h3 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.2rem;
+    margin: 0 0 0.25rem 0;
+    font-size: 0.95rem;
     color: color(text);
   }
 
   .current-song {
     display: block;
     color: color(accent);
-    font-size: 0.95rem;
+    font-size: 0.8rem;
     font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
@@ -276,15 +276,15 @@ export default {
 }
 
 .progress-container {
-  margin: 1rem 0;
+  margin: 0.5rem 0;
 
   .progress-bar {
     background: color(light-white-04);
-    height: 6px;
-    border-radius: 3px;
+    height: 4px;
+    border-radius: 2px;
     overflow: hidden;
     cursor: pointer;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
     position: relative;
 
     .buffer {
@@ -296,7 +296,7 @@ export default {
     .progress {
       background: color(accent);
       height: 100%;
-      border-radius: 3px;
+      border-radius: 2px;
       transition: width 0.1s linear;
     }
   }
@@ -304,24 +304,24 @@ export default {
   .time-display {
     display: flex;
     justify-content: space-between;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: color(muted);
   }
 }
 
 .player-controls {
   @include flex-center;
-  gap: 1rem;
-  margin: 1rem 0;
+  gap: 0.6rem;
+  margin: 0.6rem 0;
 
   .control-btn {
     background: color(light-white-04);
     color: color(text);
     border: none;
-    width: 44px;
-    height: 44px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.3s ease;
 
@@ -336,12 +336,12 @@ export default {
     }
 
     &.play-btn {
-      width: 52px;
-      height: 52px;
+      width: 44px;
+      height: 44px;
       background: color(accent);
       color: white;
-      font-size: 1.3rem;
-      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+      font-size: 1.1rem;
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
     }
 
     &.active {
@@ -354,21 +354,21 @@ export default {
 .volume-control {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin: 1rem 0;
-  padding: 0.75rem;
+  gap: 0.5rem;
+  margin: 0.6rem 0;
+  padding: 0.5rem;
   background: color(light-white-04);
   border-radius: 6px;
 
   .volume-icon {
-    font-size: 1rem;
-    min-width: 24px;
+    font-size: 0.9rem;
+    min-width: 20px;
   }
 
   .volume-slider {
     flex: 1;
-    height: 5px;
-    border-radius: 5px;
+    height: 4px;
+    border-radius: 4px;
     outline: none;
     -webkit-appearance: none;
     appearance: none;
@@ -377,16 +377,16 @@ export default {
     &::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 14px;
-      height: 14px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
       background: color(accent);
       cursor: pointer;
     }
 
     &::-moz-range-thumb {
-      width: 14px;
-      height: 14px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
       background: color(accent);
       cursor: pointer;
@@ -395,21 +395,21 @@ export default {
   }
 
   .volume-text {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     color: color(muted);
-    min-width: 35px;
+    min-width: 30px;
     text-align: right;
   }
 }
 
 .player-status {
-  margin: 0.75rem 0;
-  min-height: 20px;
+  margin: 0.4rem 0;
+  min-height: 16px;
 
   .status-item {
-    font-size: 0.85rem;
-    padding: 0.4rem 0.6rem;
-    border-radius: 4px;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.5rem;
+    border-radius: 3px;
     text-align: center;
 
     &.loading {
@@ -430,26 +430,26 @@ export default {
 }
 
 .playlist {
-  max-height: 220px;
+  max-height: 150px;
   overflow-y: auto;
   border-top: 1px solid color(light-white-04);
-  margin-top: 1rem;
-  padding-top: 0.75rem;
+  margin-top: 0.6rem;
+  padding-top: 0.5rem;
 
   .playlist-header {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     font-weight: 600;
     color: color(muted);
-    margin-bottom: 0.5rem;
-    padding: 0 0.5rem;
+    margin-bottom: 0.4rem;
+    padding: 0 0.4rem;
   }
 
   .track-item {
     display: flex;
     align-items: center;
-    padding: 0.6rem;
-    margin: 0.25rem 0;
-    border-radius: 6px;
+    padding: 0.4rem;
+    margin: 0.15rem 0;
+    border-radius: 4px;
     cursor: pointer;
     transition: all 0.2s ease;
     color: color(text);
@@ -471,15 +471,15 @@ export default {
 
     .track-number {
       color: color(muted);
-      font-size: 0.8rem;
-      min-width: 25px;
+      font-size: 0.7rem;
+      min-width: 20px;
       text-align: center;
     }
 
     .track-name {
       flex: 1;
-      font-size: 0.9rem;
-      margin: 0 0.5rem;
+      font-size: 0.8rem;
+      margin: 0 0.4rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -487,8 +487,8 @@ export default {
 
     .track-duration {
       color: color(muted);
-      font-size: 0.8rem;
-      min-width: 40px;
+      font-size: 0.7rem;
+      min-width: 35px;
       text-align: right;
     }
   }
